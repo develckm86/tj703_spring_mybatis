@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+해당 mapper.xml 을 DepartmentMapper.java 가 내부에 작성된 쿼리를 보고 자동완성
+해당 xml 이 mapper 에 의해 사용되기 위해 Mybatis 가 scan 할 수 있도록 경로지정을 해야한다.
+application.property
+-->
+<mapper namespace="com.tj703.l02_spring_mybatis.mapper.DepartmentMapper">
+    <!--   resultMap : 칼럼명과 파싱하는 dto의 필드명이 다를때 지정+join -->
+    <resultMap id="deptMap" type="com.tj703.l02_spring_mybatis.dto.DepartmentDto">
+        <id column="dept_no" property="deptNo"/>
+        <result column="dept_name" property="deptName"/>
+    </resultMap>
+<!--    <select id="findAll" resultType="com.tj703.l02_spring_mybatis.dto.DepartmentDto">-->
+<!--        SELECT dept_no deptNo, dept_name deptName FROM departments-->
+<!--    </select>-->
+<!--   id="findAll" Mapper 의 함수 이름 -->
+    <select id="findAll" resultMap="deptMap">
+        SELECT * FROM departments
+    </select>
+</mapper>
