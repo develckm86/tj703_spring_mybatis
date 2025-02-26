@@ -10,4 +10,9 @@ import java.util.List;
 public interface EmployeesMapper {
     List<Employees> findAll();
     Employees findById(@Param("no") int empNo);
+    int insert(Employees employees);
+    int update(Employees employees);
+    int delete(int empNo);
+
+
 }
