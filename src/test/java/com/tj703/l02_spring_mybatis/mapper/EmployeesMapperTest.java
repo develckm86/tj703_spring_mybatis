@@ -1,9 +1,12 @@
 package com.tj703.l02_spring_mybatis.mapper;
 
 import com.tj703.l02_spring_mybatis.dto.Employees;
+
+import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.core.annotation.Order;
 
 import java.time.LocalDate;
 
@@ -16,16 +19,19 @@ class EmployeesMapperTest {
     @Order(1)
     @Test
     void findAll() {
+        System.out.println("1 findAll");
         System.out.println(empMapper.findAll());
     }
     @Order(4)
     @Test
     void findById() {
+        System.out.println("4 findById");
         System.out.println(empMapper.findById(77));
     }
     @Order(2)
     @Test
     void insert() {
+        System.out.println("2 insert");
         Employees employees = new Employees();
         employees.setEmpNo(77);
         employees.setFirstName("경민");
@@ -38,6 +44,7 @@ class EmployeesMapperTest {
     @Order(3)
     @Test
     void update() {
+        System.out.println("3 update");
         Employees employees = new Employees();
         employees.setEmpNo(77);
         employees.setFirstName("상혁");
@@ -51,6 +58,7 @@ class EmployeesMapperTest {
     @Order(5)
     @Test
     void delete() {
+        System.out.println("5 delete");
         System.out.println(empMapper.delete(77));
     }
 }
