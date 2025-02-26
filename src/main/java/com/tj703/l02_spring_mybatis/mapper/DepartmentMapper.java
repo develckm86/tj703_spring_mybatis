@@ -8,5 +8,5 @@ import java.util.List;
 @Mapper
 public interface DepartmentMapper { //==dao DataAccessObject
     List<Departments> findAll();
-
+    Departments findById(String deptNo);
 }

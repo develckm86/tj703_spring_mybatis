@@ -25,10 +25,33 @@
     <p>
       성별 : <strong th:text="${emp.gender}"></strong>
     </p>
-    <p th:text="${emp.deptEmps}"></p>
+  <!--  fetch=lazy  trigger : toString()을 실행하면 fetch의 대상이 된다
+   <p th:text="${emp.deptEmps.toString()}"></p>-->
+    <h3>부서 이동 이력</h3>
+    <table>
+      <thead>
+      <tr>
+        <th>부서번호</th>
+        <th>부서이름</th>
+        <th>from_date</th>
+        <th>to_date</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="de:${emp.deptEmps}">
+        <td th:text="${de.deptNo}"></td>
+        <td th:text="${de.dept.deptName}"></td>
+        <td th:text="${de.fromDate}"></td>
+        <td th:text="${de.toDate}"></td>
+      </tr>
+      </tbody>
+    </table>
+    <h3>급여리스트(1:N salaries)</h3>
+    <h3>직책리스트(1:N titles)</h3>
     <p>
       <a th:href="@{/emp/modify.do(empNo=${emp.empNo})}">수정페이지</a>
     </p>
+
   </div>
 </body>
 </html>
