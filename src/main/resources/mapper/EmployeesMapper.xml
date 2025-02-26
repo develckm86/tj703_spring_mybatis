@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tj703.l02_spring_mybatis.mapper.EmployeesMapper">
+  <resultMap id="empMap" type="com.tj703.l02_spring_mybatis.dto.Employees">
+    <id column="emp_no" jdbcType="INTEGER" property="empNo" />
+    <result column="birth_date" jdbcType="DATE" property="birthDate" />
+    <result column="first_name" jdbcType="VARCHAR" property="firstName" />
+    <result column="last_name" jdbcType="VARCHAR" property="lastName" />
+    <result column="gender" jdbcType="OTHER" property="gender" />
+    <result column="hire_date" jdbcType="DATE" property="hireDate" />
+  </resultMap>
+  <select id="findAll" resultMap="empMap">
+    SELECT * FROM employees LIMIT 0,100;
+  </select>
+  <select id="findById" resultMap="empMap">
+    SELECT * FROM employees WHERE emp_no=#{no}
+  </select>
+
+</mapper>
