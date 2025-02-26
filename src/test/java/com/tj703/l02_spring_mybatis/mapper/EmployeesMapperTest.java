@@ -26,7 +26,7 @@ class EmployeesMapperTest {
     @Test
     void findById() {
         System.out.println("4 findById");
-        System.out.println(empMapper.findById(77));
+        System.out.println(empMapper.findById(10010));
     }
     @Order(2)
     @Test

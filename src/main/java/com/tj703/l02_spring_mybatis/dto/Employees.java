@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
+
 import lombok.Data;
 
 /**
@@ -20,5 +22,9 @@ public class Employees implements Serializable {
     private String lastName;
     private Gender gender;
     private LocalDate hireDate;
+    //1:N fk emp_no
+    private List<DeptEmp> deptEmps;
+
+
     private static final long serialVersionUID = 1L;
 }

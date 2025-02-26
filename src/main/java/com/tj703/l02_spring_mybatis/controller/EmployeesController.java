@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/emp")
@@ -23,5 +24,16 @@ public class EmployeesController {
         //3. null 인경우는 없고 만약 없으면  [] 를 반환
         return "emp/readAll";
     }
+    @GetMapping("/read.do")
+    public String read(
+            Model model,
+            @RequestParam int empNo
+    ) {
+        model.addAttribute("emp", empService.read(empNo));
+        return "emp/read";
+    }
+
+
+
 
 }
