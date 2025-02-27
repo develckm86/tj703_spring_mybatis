@@ -19,15 +19,22 @@
       </association>
     </collection>
   </resultMap>
-  <resultMap id="empFetchMap" type="com.tj703.l02_spring_mybatis.dto.Employees">
+  <resultMap id="empFetchMap" type="Employees">
     <id column="emp_no"  property="empNo" />
     <result column="birth_date"  property="birthDate" />
     <result column="first_name"  property="firstName" />
     <result column="last_name" property="lastName" />
     <result column="gender"  property="gender" />
     <result column="hire_date"  property="hireDate" />
+
+    <association property="totalSalary" fetchType="lazy" column="emp_no"
+                select="com.tj703.l02_spring_mybatis.mapper.SalariesMapper.findSumSalaryByEmpNo"/>
+
     <collection property="deptEmps" fetchType="lazy"
                 select="findDeptEmpByEmpNo" column="emp_no" />
+    <collection property="salaries" column="emp_no" fetchType="lazy"
+                select="com.tj703.l02_spring_mybatis.mapper.SalariesMapper.findByEmpNo"/>
+
   </resultMap>
 
   <resultMap id="deptEmpMap" type="com.tj703.l02_spring_mybatis.dto.DeptEmp">
@@ -63,9 +70,12 @@
         LEFT JOIN departments d ON de.dept_no=d.dept_no
     WHERE e.emp_no=#{no}
   </select>
+
   <select id="findById" resultMap="empFetchMap">
     SELECT * FROM employees WHERE emp_no=#{no}
   </select>
+
+
   <select id="findDeptEmpByEmpNo" resultMap="deptEmpMap">
     SELECT * FROM dept_emp WHERE emp_no=#{empNo}
   </select>

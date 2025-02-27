@@ -1,46 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>사원 리스트</title>
-</head>
+<head th:replace="fragments/headLink :: head"></head>
 <body>
-  <h1>사원 리스트</h1>
-  <!--  <p th:text="${emps}"></p>-->
-  <table>
-    <thead>
-    <tr>
-      <th>사번</th><th>이름</th><th>생일</th><th>성별</th><th>상세</th>
-    </tr>
-    </thead>
-    <tbody>
-<!--   for(Employees emp : emps)  emp for 에서만 사용 가능한 지역변수
-       타입리프는 형변환이 자동으로 됩니다.
-       타임리프는 get()   함수를 호출할때 필드명으로 할 수 있다.
-  -->
-      <tr th:each="emp : ${emps}">
-        <td th:text="${emp.empNo}"></td>
-        <td th:text="${#strings.concat(emp.lastName,' ',emp.firstName)}"></td>
-<!--        <td th:text="${emp.birthDate}"></td>
-  #dates : java.util.Date 포맷
-  #temporals : LocalDate, LocalDateTime
--->
-        <td th:text="${#temporals.format(emp.birthDate,'yyyy년 M월 d일')}"></td>
-        <td>
-          <th:block th:if="${emp.gender==emp.gender.F}">
-            여성
-          </th:block>
-          <th:block th:unless="${emp.gender==emp.gender.F}">
-            남성
-          </th:block>
-        </td>
-        <td>
-        <!--          <a th:href="/emp/readAll.do?empNo=${emp.empNo}">상세</a>-->
-          <a th:href="@{ /emp/read.do (empNo=${emp.empNo} )}">상세</a>
-        <!--         http://localhost:7777/emp/read.do?empNo=10001 -->
-        </td>
+  <header th:replace="fragments/headerNav :: navbar"></header>
+  <div class="container">
+    <h1>사원 리스트</h1>
+    <!--  <p th:text="${emps}"></p>-->
+    <table class="table">
+      <thead>
+      <tr>
+        <th>사번</th><th>이름</th><th>생일</th><th>성별</th><th>상세</th>
       </tr>
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+  <!--   for(Employees emp : emps)  emp for 에서만 사용 가능한 지역변수
+         타입리프는 형변환이 자동으로 됩니다.
+         타임리프는 get()   함수를 호출할때 필드명으로 할 수 있다.
+    -->
+        <tr th:each="emp : ${emps}">
+          <td th:text="${emp.empNo}"></td>
+          <td th:text="${#strings.concat(emp.lastName,' ',emp.firstName)}"></td>
+  <!--        <td th:text="${emp.birthDate}"></td>
+    #dates : java.util.Date 포맷
+    #temporals : LocalDate, LocalDateTime
+  -->
+          <td th:text="${#temporals.format(emp.birthDate,'yyyy년 M월 d일')}"></td>
+          <td>
+            <th:block th:if="${emp.gender==emp.gender.F}">
+              여성
+            </th:block>
+            <th:block th:unless="${emp.gender==emp.gender.F}">
+              남성
+            </th:block>
+          </td>
+          <td>
+          <!--          <a th:href="/emp/readAll.do?empNo=${emp.empNo}">상세</a>-->
+            <a th:href="@{ /emp/read.do (empNo=${emp.empNo} )}">상세</a>
+          <!--         http://localhost:7777/emp/read.do?empNo=10001 -->
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </body>
 </html>

@@ -30,9 +30,18 @@ public class EmployeesController {
             @RequestParam int empNo
     ) {
         model.addAttribute("emp", empService.read(empNo));
+        model.addAttribute("title","사원상세");
         return "emp/read";
     }
 
+    @GetMapping("/modify.do")
+    public String modify(
+            @RequestParam int empNo,
+            Model model) {
+        model.addAttribute("emp", empService.read(empNo));
+        model.addAttribute("title","사원 수정 양식");
+        return "emp/modify";
+    }
 
 
 

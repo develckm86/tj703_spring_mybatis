@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tj703.l02_spring_mybatis.mapper.SalariesMapper">
+  <resultMap id="salaryMap" type="Salaries">
+    <id column="emp_no" jdbcType="INTEGER" property="empNo" />
+    <id column="from_date" jdbcType="DATE" property="fromDate" />
+    <result column="salary" jdbcType="INTEGER" property="salary" />
+    <result column="to_date" jdbcType="DATE" property="toDate" />
+  </resultMap>
+<!-- findByEmpNo 가  fetch 대상이 되려면 꼭 resultMap 을 정의해야함-->
+  <select id="findByEmpNo" resultMap="salaryMap">
+    SELECT * FROM salaries WHERE emp_no=#{empNo}
+  </select>
+  <select id="findSumSalaryByEmpNo" resultType="java.lang.Long">
+    SELECT SUM(salary) FROM salaries WHERE emp_no=#{empNo}
+  </select>
+</mapper>

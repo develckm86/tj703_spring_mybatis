@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>spring data mybatis</title>
-</head>
+
+<!--fragments/headLink.html 문서에서 head 태그만 불러올거야!-->
+<head th:replace="fragments/headLink :: head"></head>
 <body>
-  <h1>Spring Mybatis( Session Factory) 수업</h1>
-  <hr>
-  <h2><a href="/emp/readAll.do">사원 리스트</a></h2>
+    <header th:replace="fragments/headerNav :: navbar"></header>
+    <div class="container">
+        <h1>Spring Mybatis( Session Factory) 수업</h1>
+        <hr>
+        <h2><a href="/emp/readAll.do">사원 리스트</a></h2>
+    </div>
 </body>
 </html>

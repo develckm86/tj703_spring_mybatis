@@ -7,12 +7,14 @@ import java.util.Date;
 import java.util.List;
 
 import lombok.Data;
+import org.apache.ibatis.type.Alias;
 
 /**
  * employees
  */
+@Alias("Employees")
 @Data
-public class Employees implements Serializable {
+public class Employees {
     public enum Gender {
         M,F
     }
@@ -22,9 +24,10 @@ public class Employees implements Serializable {
     private String lastName;
     private Gender gender;
     private LocalDate hireDate;
+
+    private Long totalSalary;
+
     //1:N fk emp_no
     private List<DeptEmp> deptEmps;
-
-
-    private static final long serialVersionUID = 1L;
+    private List<Salaries> salaries;
 }
