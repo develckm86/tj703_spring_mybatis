@@ -2,6 +2,8 @@ package com.tj703.l02_spring_mybatis.controller;
 
 import com.tj703.l02_spring_mybatis.dto.Employees;
 import com.tj703.l02_spring_mybatis.service.EmpoyeesService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -65,5 +67,36 @@ public class EmployeesController {
         return "emp/register";
     }
     //register.do post ->성공 상세, 실패 -> register
+    @PostMapping("/register.do")
+    public String registerAction (
+            Employees emp,
+            RedirectAttributes ra,
+            HttpServletResponse resp){
+        boolean result=false;
+        result=empService.register(emp);
+        if(result) {
+            ra.addAttribute("empNo",emp.getEmpNo());
+            return "redirect:/emp/read.do";
+        }else{
+
+            return "redirect:/emp/register.do";
+        }
+    }
+
+    @GetMapping("/remove.do")
+    public String removeAction(
+            @RequestParam int empNo,
+            RedirectAttributes ra
+    ){
+        boolean result=false;
+        result=empService.remove(empNo);
+        if(result){
+            return "redirect:/emp/readAll.do";
+        }else{
+            ra.addAttribute("empNo",empNo);
+            return "redirect:/emp/modify.do";
+        }
+    }
+
     //remove.do get ->성공 list, 실패 -> modify
 }
