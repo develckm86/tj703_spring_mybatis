@@ -1,12 +1,15 @@
 package com.tj703.l02_spring_mybatis.controller;
 
+import com.tj703.l02_spring_mybatis.dto.Employees;
 import com.tj703.l02_spring_mybatis.service.EmpoyeesService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/emp")
@@ -42,7 +45,25 @@ public class EmployeesController {
         model.addAttribute("title","사원 수정 양식");
         return "emp/modify";
     }
-
-
-
+    @PostMapping("/modify.do")
+    public String modifyAction(
+            Employees emp,
+            RedirectAttributes ra){
+        //RedirectAttributes 파라미터 추가
+        boolean result=false;
+        result=empService.modify(emp);
+        ra.addAttribute("empNo",emp.getEmpNo());
+        if(result){
+            return "redirect:/emp/read.do";
+        }else{
+            return "redirect:/emp/modify.do";
+        }
+    }
+    @GetMapping("/register.do")
+    public String register(Model model) {
+        model.addAttribute("title","사원 등록 양식");
+        return "emp/register";
+    }
+    //register.do post ->성공 상세, 실패 -> register
+    //remove.do get ->성공 list, 실패 -> modify
 }
